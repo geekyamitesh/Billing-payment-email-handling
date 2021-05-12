@@ -4,6 +4,19 @@ const mongoose = require('mongoose');
 const keys = require('../config/key');
 const User = mongoose.model('users');
 
+passport.serializeUser((user, done) =>{
+      done(null,user.id);
+           
+});
+
+passport.deserializeUser((id ,done) =>{
+
+})
+
+
+
+
+
 passport.use(
   new GoogleStrategy(
     {
@@ -21,17 +34,14 @@ passport.use(
               //we already have a record with given profileId      
             }else {
               //we don't have a newuser in db
+              // modal instances in databases
               new User ({
                 googleId: profile.id
               })
               .save()
               .then(user => done(null, user));
-              
-             
-
-
             }
-      })
+      });
      
     }
   )
